@@ -41,6 +41,6 @@ if __name__ == '__main__':
         for i in blog_url_extract(yinwang_blog):
             if i.get('href') not in old_url_list:
                 mail_send(i.get_text(), i.get('href'))
-            else:
-                print('The blog of yinwang do not update today,what the fucking sad!!!')
+        else:
+            print('The blog of yinwang do not update today,what the fucking sad!!!')
         time.sleep(86400)
