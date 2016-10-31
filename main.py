@@ -38,9 +38,9 @@ def mail_send(subject, mail_body):
 if __name__ == '__main__':
     while True:
         old_url_list = [i.get('href') for i in blog_url_extract(yinwang_blog)]
-        time.sleep(86400)
         for i in blog_url_extract(yinwang_blog):
             if i.get('href') not in old_url_list:
                 mail_send(i.get_text(), i.get('href'))
             else:
                 print('The blog of yinwang do not update today,what the fucking sad!!!')
+        time.sleep(86400)
