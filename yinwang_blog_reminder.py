@@ -12,10 +12,13 @@ yinwang_blog = 'http://www.yinwang.org/'
 
 
 def blog_url_extract(url):
-    rep_data = requests.get(url)
-    soup = BeautifulSoup(rep_data.text, 'lxml')
-    blogs = soup.select('ul.list-group li a')
-    return blogs
+    try:
+        rep_data = requests.get(url)
+        soup = BeautifulSoup(rep_data.text, 'lxml')
+        blogs = soup.select('ul.list-group li a')
+        return blogs
+    except requests.exceptions.RequestException:
+        print(' Got an issue that we are not very sure,just ignore it a moment...')
 
 
 def mail_send(subject, mail_body):
