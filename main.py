@@ -14,7 +14,7 @@ yinwang_blog = 'http://www.yinwang.org/'
 def blog_url_extract(url):
     try:
         rep_data = requests.get(url)
-        soup = BeautifulSoup(rep_data.text, 'lxml')
+        soup = BeautifulSoup(rep_data.text, 'html5lib')
         blogs = soup.select('ul.list-group li a')
         return blogs
     except requests.exceptions.RequestException:
