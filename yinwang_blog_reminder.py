@@ -19,7 +19,10 @@ def blog_url_extract(url):
         blogs = soup.select('ul.list-group li a')
         return blogs
     except requests.exceptions.RequestException:
-        print(' Got an issue that we are not very sure,just ignore it a moment...')
+        print(' Got an issue of network that we are not very sure,'
+              'just rest a while to wait the network to normal...')
+        time.sleep(3600)
+
 
 
 def mail_send(subject, mail_body):
