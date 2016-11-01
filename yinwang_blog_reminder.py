@@ -7,6 +7,7 @@ import pprint
 import config
 import smtplib
 from email.mime.text import MIMEText
+import datetime
 
 yinwang_blog = 'http://www.yinwang.org/'
 
@@ -34,7 +35,6 @@ def mail_send(subject, mail_body):
     s.sendmail(config.sender, config.receiver, msg.as_string())
     s.quit()
 
-
 if __name__ == '__main__':
     while True:
         old_url_list = [i.get('href') for i in blog_url_extract(yinwang_blog)]
@@ -42,5 +42,7 @@ if __name__ == '__main__':
             if i.get('href') not in old_url_list:
                 mail_send(i.get_text(), i.get('href'))
         else:
-            print('The blog of yinwang do not update today,what the fucking sad!!!')
+            print('The blog of yinwang do not update on {},'
+                  'what the fucking sad!!!'.format(datetime.date.today()))
         time.sleep(86400)
+
