@@ -37,7 +37,7 @@ def blog_source_get(url):
         except requests.exceptions.RequestException:
             logger_getter().debug('Issue of network so that we cannot '
                                   'get the whole page source,wait then try again...')
-            time.sleep(3)
+            time.sleep(1800)
 
 
 def blog_url_extract():
@@ -63,7 +63,7 @@ def mail_send(subject, mail_body):
 if __name__ == '__main__':
     while True:
         old_url_list = [i.get('href') for i in blog_url_extract()]
-        logger_getter().debug('The crawler is already running,just wait a second...')
+        logger_getter().debug('The crawler is already running,just wait for lots of 1s...')
         time.sleep(86400)
         for i in blog_url_extract():
             if i.get('href') not in old_url_list:
