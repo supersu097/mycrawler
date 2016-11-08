@@ -35,8 +35,8 @@ def blog_source_get(url):
         if rep_data.status_code == 200:
             return rep_data
         else:
-            logger_getter().debug('Got an issue of network that we are not very sure,'
-                                  'just rest a while to wait the network to normal...')
+            logger_getter().debug('Issue of network so that we cannot '
+                                  'get the whole page source,wait then try again...')
             time.sleep(3)
 
 
@@ -62,15 +62,12 @@ def mail_send(subject, mail_body):
 
 if __name__ == '__main__':
     while True:
-        try:
-            old_url_list = [i.get('href') for i in blog_url_extract()]
-            logger_getter().debug('The crawler is already running,just wait a second...')
-            time.sleep(86400)
-            for i in blog_url_extract():
-                if i.get('href') not in old_url_list:
-                    mail_send(i.get_text(), i.get('href'))
-            else:
-                logger_getter().debug('The blog of yinwang do not update today,'
-                                      'what the fucking sad!!!')
-        except TypeError:
-            logger_getter().debug('Due to the upstream unknown mistake,just keep ignoring...')
+        old_url_list = [i.get('href') for i in blog_url_extract()]
+        logger_getter().debug('The crawler is already running,just wait a second...')
+        time.sleep(86400)
+        for i in blog_url_extract():
+            if i.get('href') not in old_url_list:
+                mail_send(i.get_text(), i.get('href'))
+        else:
+            logger_getter().debug('The blog of yinwang do not update today,'
+                                  'what the fucking sad!!!')
