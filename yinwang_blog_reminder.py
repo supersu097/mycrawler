@@ -31,10 +31,10 @@ def logger_getter():
 
 def blog_source_get(url):
     while True:
-        rep_data = requests.get(url)
-        if rep_data.status_code == 200:
+        try:
+            rep_data = requests.get(url)
             return rep_data
-        else:
+        except requests.exceptions.RequestException:
             logger_getter().debug('Issue of network so that we cannot '
                                   'get the whole page source,wait then try again...')
             time.sleep(3)
