@@ -12,6 +12,23 @@ import datetime
 yinwang_blog = 'http://www.yinwang.org/'
 
 
+def logger_getter():
+    import logging
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s -%(message)s",
+                                    datefmt='%Y-%m-%d %H:%M')
+    file_handler = logging.FileHandler('tmp.log')
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.DEBUG)
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+    return logger
+
 def blog_url_extract(url):
     try:
         rep_data = requests.get(url)
@@ -19,7 +36,7 @@ def blog_url_extract(url):
         blogs = soup.select('ul.list-group li a')
         return blogs
     except requests.exceptions.RequestException:
-        print(' Got an issue of network that we are not very sure,'
+        logger_getter().debug(' Got an issue of network that we are not very sure,'
               'just rest a while to wait the network to normal...')
         time.sleep(3600)
 
@@ -42,15 +59,15 @@ if __name__ == '__main__':
     while True:
         try:
             old_url_list = [i.get('href') for i in blog_url_extract(yinwang_blog)]
-            print('The crawler is already running,just wait a second...')
+            logger_getter().debug('The crawler is already running,just wait a second...')
             time.sleep(86400)
             for i in blog_url_extract(yinwang_blog):
                 if i.get('href') not in old_url_list:
                     mail_send(i.get_text(), i.get('href'))
             else:
-                print('The blog of yinwang do not update on {},'
-                      'what the fucking sad!!!'.format(datetime.date.today()))
+                logger_getter().debug('The blog of yinwang do not update today,'
+                                      'what the fucking sad!!!')
         except TypeError:
-            print('Due to the upstream unknown mistake,just keep ignoring...')
+            logger_getter().debug('Due to the upstream unknown mistake,just keep ignoring...')
 
 
