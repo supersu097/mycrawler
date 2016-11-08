@@ -29,10 +29,10 @@ def logger_getter():
     return logger
 
 
-def blog_source_get(url):
+def blog_source_get():
     while True:
         try:
-            rep_data = requests.get(url)
+            rep_data = requests.get(yinwang_blog)
             return rep_data
         except requests.exceptions.RequestException:
             logger_getter().debug('Issue of network so that we cannot '
@@ -41,7 +41,7 @@ def blog_source_get(url):
 
 
 def blog_url_extract():
-    soup = BeautifulSoup(blog_source_get(yinwang_blog).text, 'html5lib')
+    soup = BeautifulSoup(blog_source_get().text, 'html5lib')
     blog_url_lists = soup.select('ul.list-group li a')
     return blog_url_lists
 
