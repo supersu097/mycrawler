@@ -18,7 +18,7 @@ def logger_getter():
     logger.setLevel(logging.DEBUG)
     formatter = logging.Formatter("%(asctime)s - %(levelname)s -%(message)s",
                                     datefmt='%Y-%m-%d %H:%M')
-    file_handler = logging.FileHandler('tmp.log')
+    file_handler = logging.FileHandler('record.log')
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
