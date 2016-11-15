@@ -64,7 +64,7 @@ if __name__ == '__main__':
     while True:
         old_url_list = [i.get('href') for i in blog_url_extract()]
         logger_getter().debug('The crawler is already running,just wait for lots of 1s...')
-        time.sleep(86400)
+        time.sleep(43200)
         for i in blog_url_extract():
             if i.get('href') not in old_url_list:
                 mail_send(i.get_text(), i.get('href'))
