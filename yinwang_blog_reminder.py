@@ -67,6 +67,7 @@ if __name__ == '__main__':
         time.sleep(43200)
         for i in blog_url_extract():
             if i.get('href') not in old_url_list:
+                logger_getter().debug('Wow,yinwang publish a new blog,hooray!!!')
                 mail_send(i.get_text(), i.get('href'))
             else:
                 logger_getter().debug('The blog of yinwang do not update today,'
