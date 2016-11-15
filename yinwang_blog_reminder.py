@@ -27,7 +27,7 @@ def logger_getter():
         console_handler.setLevel(logging.DEBUG)
         console_handler.setFormatter(formatter)
         logger.addHandler(console_handler)
-        return logger
+    return logger
 
 
 def blog_source_get():
