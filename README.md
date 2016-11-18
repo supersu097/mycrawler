@@ -8,11 +8,8 @@
 Use the command below to solve the dependency,especially that you can still use the `pip` to install the `Virtualenv` to run this project which means you get an isolated virtual environment to avoid some issues,and also means that you can run the `pip` command without gaining the root privilage with the prefix of `sudo`.  
 `sudo pip install -r requirement.txt`  
 
-# Configuration 
-You need to create a file named `config.py` with three required fields of `sender` `receiver` and `pwd`.Their data type are all the String.And it's also important to know that not one of them can be dispensed with.The value of sender and receiver are the respective Email adress as their literal meaning that the var name represents. For the filed of sender,I use the Email sevice provider of 126.com as the sender.All about the sender you should know is that you need to allow the POP3/SMTP/IMAP service in the system setting page and remember the URL of the SMTP server such as smtp.126.com.Next,the filed of pwd is a auth code for mail.126.com in this circumstance for me.  
-
-# Notice
-The receiver mentioned above is   
+# Configuration & Notice 
+You need to create a file named `config.py` with three required fields of `sender` `receiver` and `pwd`.Their data type are all the String.And it's also important to know that not one of them can be dispensed with.The value of sender and receiver are the respective Email adress as their literal meaning that the var name represents. For the filed of sender,I use the Email sevice provider of 126.com as the sender.All about the sender you should know is that you need to allow the POP3/SMTP/IMAP service in the system setting page and remember the URL of the SMTP server such as smtp.126.com.Next,the filed of pwd is a auth code for mail.126.com in this circumstance for me.Also notice that the receiver mentioned above is:  
 ```
 A list of addresses to send this mail to. A bare string will be treated as a list with 1 address.
 ```
