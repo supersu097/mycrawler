@@ -65,14 +65,13 @@ if __name__ == '__main__':
     while True:
         old_url_list = [i.get('href') for i in blog_url_extract()]
         logger_getter().debug('The crawler is already running,just wait for lots of 1s...')
-        url_list_len = len(old_url_list)
         for i in blog_url_extract():
             if i.get('href') not in old_url_list:
                 logger_getter().debug('Wow,yinwang publish a new blog,hooray!!!')
                 mail_send(i.get_text(), i.get('href'))
             else:
-                url_list_len -= 1
-        if url_list_len == 0:
+                old_url_list.remove(i)
+        if len(old_url_list) == 0:
             logger_getter().debug('The blog of yinwang do not update today,'
                                   'what the fucking sad!!!')
         time.sleep(43200)
