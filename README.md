@@ -13,7 +13,7 @@ You need to create a file named `config.py` with three required fields of `sende
 ```
 A list of addresses to send this mail to. A bare string will be treated as a list with 1 address.
 ```
-which means I think that if you have several friends that need to receive the message from you,the field of receiver's data type shoud be a List with String.Finally,the filed of pwd is a auth code for mail.126.com in this circumstance for me.
+which means I think that if you have several friends that need to receive the message from you,the field of receiver's data type shoud be a List with String.Finally,the filed of pwd is an auth code for mail.126.com in this circumstance for me.
 
 # Usage
 Once all steps above you have done,just run one of the scripts which show in this repo to wait lots of 1s to see what will happen.For example:  
