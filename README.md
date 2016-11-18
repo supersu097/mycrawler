@@ -14,7 +14,7 @@ You need to create a file named `config.py` with three required fields of `sende
 # Notice
 The receiver mentioned above is   
 ```
-A list of addresses to send this mail to. A bare string will be treated as a list with 1 address
+A list of addresses to send this mail to. A bare string will be treated as a list with 1 address.
 ```
 which means I think that if you have several friends that need to receive the message from you,the field of receiver's data type shoud be a List with String.
 
