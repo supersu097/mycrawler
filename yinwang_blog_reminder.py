@@ -75,4 +75,4 @@ if __name__ == '__main__':
         if len(old_url_list) == 0:
             logger_getter().debug('The blog of yinwang do not update today,'
                                   'what the fucking sad!!!')
-        time.sleep(43200)
+        time.sleep(21600)
