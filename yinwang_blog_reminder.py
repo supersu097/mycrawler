@@ -51,7 +51,7 @@ def mail_send(subject, mail_body):
     host = 'smtp.126.com'
     port = 25
     msg = MIMEText(mail_body)
-    msg['Subject'] = '垠神的新文章：'.decode('utf-8') + subject
+    msg['Subject'] = subject
     msg['From'] = config.sender
     msg['To'] = config.receiver
     s = smtplib.SMTP(host, port)
@@ -65,14 +65,31 @@ if __name__ == '__main__':
     while True:
         old_url_list = [i.get('href') for i in blog_url_extract()]
         logger_getter().debug('The crawler is already running,just wait for lots of 1s...')
-        for i in blog_url_extract():
-            url=i.get('href')
-            if url not in old_url_list:
-                logger_getter().debug('Wow,yinwang publish a new blog,hooray!!!')
-                mail_send(i.get_text(), url)
+        time.sleep(3)
+        new_url_list = blog_url_extract()
+        if len(new_url_list) < len(old_url_list):
+            logger_getter().debug('Yinwang delete some blog...')
+            disappeared_blog = set(old_url_list) - set(new_url_list)
+            if len(disappeared_blog) == 1:
+                logger_getter().debug('Yinwang deleted a blog...')
+                mail_send('垠神删除了博客: '.decode('utf-8') + [_.get_text() for _ in disappeared_blog][0],
+                          'Nothing need to be known this time')
             else:
-                old_url_list.remove(url)
-        if len(old_url_list) == 0:
+                logger_getter().debug('Yinwang deleted more than one blog...')
+                mail_send('垠神删除了不止一篇博客'.decode('utf-8'),
+                          '\n'.join([_.get_text() for _ in disappeared_blog]))
+
+        elif len(new_url_list) > len(old_url_list):
+            new_blog = set(new_url_list) - set(old_url_list)
+            if len(new_url_list) == 1:
+                logger_getter().debug('Yinwang published a new blog...')
+                mail_send('垠神发表了新博客: '.decode('utf-8') + [_.get_text() for _ in new_blog][0],
+                          [_.get('href') for _ in new_blog][0])
+            else:
+                logger_getter().debug('Yinwang published more than one new blog...')
+                mail_send('垠神发表了不止一篇新博客'.decode('utf-8'),
+                          '\n'.join([_.get_text() + ': ' + _.get('href') for _ in new_blog]))
+
+        elif len(new_url_list) == len(old_url_list):
             logger_getter().debug('The blog of yinwang do not update today,'
                                   'what the fucking sad!!!')
-        time.sleep(21600)
