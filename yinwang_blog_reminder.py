@@ -66,7 +66,7 @@ if __name__ == '__main__':
         old_aTag_list = blog_aTag_extract()
         # print 'old: ' + str(len(old_aTag_list))
         logger_getter().debug('The crawler is already running,just wait for lots of 1s...')
-        time.sleep(5)
+        time.sleep(3600)
         new_aTag_list = blog_aTag_extract()
         # print 'new: ' + str(len(new_aTag_list))
         if len(new_aTag_list) < len(old_aTag_list):
