@@ -69,11 +69,13 @@ if __name__ == '__main__':
         time.sleep(3600)
         new_aTag_list = blog_aTag_extract()
         # print 'new: ' + str(len(new_aTag_list))
+        # Notice that in this logic,
+        # to get the blog which deleted should use the var of old_aTag_list
         if len(new_aTag_list) < len(old_aTag_list):
             disappeared_blog = set(old_aTag_list) - set(new_aTag_list)
             if len(disappeared_blog) == 1:
                 logger_getter().debug('Yinwang deleted a blog...')
-                mail_send('垠神删除了博客: '.decode('utf-8') + [_.get_text() for _ in new_aTag_list][0], '')
+                mail_send('垠神删除了博客: '.decode('utf-8') + [_.get_text() for _ in old_aTag_list][0], '')
             else:
                 logger_getter().debug('Yinwang deleted more than one blog...')
                 mail_send('垠神删除了不止一篇博客'.decode('utf-8'),
