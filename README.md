@@ -1,13 +1,13 @@
 # mycrawler
  A series of crawlers written in py which make my life more comfortable  
 
-# Overview
-- yinwang_blog_reminder.py 
+## Overview
+- `yinwang_blog_reminder.py`  
 Whatever Yinwang publish or delete one or more blog,you can always get to be known
 by the Email you set.
 
 # Prerequisite 
-Execute the command below to solve the dependency:
+Execute the command below to solve the dependency:  
 `sudo pip install -r requirement.txt`  
 
 # Configuration & Notice 
