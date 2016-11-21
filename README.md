@@ -2,10 +2,12 @@
  A series of crawlers written in py which make my life more comfortable  
 
 # Overview
-- yinwang_blog_reminder.py &emsp;&emsp;&emsp; the func as the filename says  
+- yinwang_blog_reminder.py 
+Whatever Yinwang publish or delete one or more blog,you can always get to be known
+by the Email you set.
 
 # Prerequisite 
-Use the command below to solve the dependency,especially that you can still use the `pip` to install the `Virtualenv` to run this project which means you get an isolated virtual environment to avoid some issues,and also means that you can run the `pip` command without gaining the root privilage with the prefix of `sudo`.  
+Execute the command below to solve the dependency:
 `sudo pip install -r requirement.txt`  
 
 # Configuration & Notice 
