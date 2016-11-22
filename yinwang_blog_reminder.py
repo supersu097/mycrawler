@@ -42,7 +42,7 @@ def blog_source_get():
 
 
 def blog_aTag_extract():
-    soup = BeautifulSoup(blog_source_get().text, 'html5lib')
+    soup = BeautifulSoup(blog_source_get().content, 'html5lib')
     blog_url_lists = soup.select('ul.list-group li a')
     return blog_url_lists
 
