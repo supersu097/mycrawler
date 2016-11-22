@@ -98,6 +98,7 @@ def main():
 
 if __name__ == '__main__':
     while True:
+        logger_getter().debug('crawler is running,pls wait...')
         s = sched.scheduler(time.time, time.sleep)
         s.enter(3600,1,main,())
         s.run()
