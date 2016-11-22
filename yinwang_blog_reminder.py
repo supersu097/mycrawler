@@ -99,5 +99,5 @@ def main():
 if __name__ == '__main__':
     while True:
         s = sched.scheduler(time.time, time.sleep)
-        s.enter(600,1,main,())
+        s.enter(3600,1,main,())
         s.run()
