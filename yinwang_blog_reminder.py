@@ -1,14 +1,11 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-import os
 import time
-import sched
 import config
 import logging
 import smtplib
 import requests
-import schedule
 from bs4 import BeautifulSoup
 from email.mime.text import MIMEText
 
