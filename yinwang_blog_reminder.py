@@ -62,6 +62,7 @@ def mail_send(subject, mail_body):
 if __name__ == '__main__':
     while True:
         if blog_aTag_extract() != None:
+            logger_getter().debug('Crawler is running...')
             old_aTag_list = blog_aTag_extract()
             time.sleep(3600)
             new_aTag_list = blog_aTag_extract()
