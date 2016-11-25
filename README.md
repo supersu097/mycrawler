@@ -22,6 +22,6 @@ Once all steps above you have done,just run one of the scripts which show in thi
 `python yinwang_blog_reminder.py`
 
 ## Help
-I suffer a very strange issue that once I set the time interval to 3600s in the function of time.sleep(),the main process of this script will stop at the time.sleep() forever. So by now I set it to 3599s,I have to say such way is very embarrassed. Finally,any advice are welcome.
+I suffer a very strange issue that once I set the time interval to 3600s in the function of time.sleep(),the main process of this script will hang at the time.sleep() forever. So by now I set it to 3599s,I have to say such way is very embarrassed. Finally,any advice are welcome.
 
 
