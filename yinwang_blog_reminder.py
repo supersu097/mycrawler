@@ -31,18 +31,19 @@ def logger_getter():
 
 
 def blog_source_get():
-    try:
-        rep_data = requests.get(yinwang_blog)
-        return rep_data
-    except requests.exceptions.RequestException:
-        logger_getter().debug('Issue of network so that we cannot get the whole page source...')
+    while True:
+        try:
+            rep_data = requests.get(yinwang_blog)
+            return rep_data
+        except requests.exceptions.RequestException:
+            logger_getter().debug('Issue of network so that we cannot get the whole page source...')
+            time.sleep(1799)
 
 
 def blog_aTag_extract():
-    if blog_source_get() != None:
-        soup = BeautifulSoup(blog_source_get().content, 'html5lib')
-        blog_aTag_lists = soup.select('ul.list-group li a')
-        return blog_aTag_lists
+    soup = BeautifulSoup(blog_source_get().content, 'html5lib')
+    blog_aTag_lists = soup.select('ul.list-group li a')
+    return blog_aTag_lists
 
 
 def mail_send(subject, mail_body):
@@ -61,40 +62,36 @@ def mail_send(subject, mail_body):
 
 if __name__ == '__main__':
     while True:
-        if blog_aTag_extract() != None:
-            logger_getter().debug('Crawler is running...')
-            old_aTag_list = blog_aTag_extract()
-            time.sleep(3600)
-            new_aTag_list = blog_aTag_extract()
+        logger_getter().debug('Crawler is running...')
+        old_aTag_list = blog_aTag_extract()
+        time.sleep(3599)
+        new_aTag_list = blog_aTag_extract()
 
-            if len(new_aTag_list) < len(old_aTag_list):
-                # Notice that in this situation,
-                # to get the blog which deleted should use the var of old_aTag_list
-                disappeared_blog = set(old_aTag_list) - set(new_aTag_list)
-                if len(disappeared_blog) == 1:
-                    logger_getter().debug('Yinwang deleted a blog...')
-                    mail_send('垠神删除了博客: '.decode('utf-8') + [_.get_text() for _ in old_aTag_list][0], '')
+        if len(new_aTag_list) < len(old_aTag_list):
+            # Notice that in this situation,
+            # to get the blog which deleted should use the var of old_aTag_list
+            disappeared_blog = set(old_aTag_list) - set(new_aTag_list)
+            if len(disappeared_blog) == 1:
+                logger_getter().debug('Yinwang deleted a blog...')
+                mail_send('垠神删除了博客: '.decode('utf-8') + [_.get_text() for _ in old_aTag_list][0], '')
                 else:
                     logger_getter().debug('Yinwang deleted more than one blog...')
                     mail_send('垠神删除了不止一篇博客'.decode('utf-8'),
                               '\n'.join([_.get_text() for _ in old_aTag_list][0:len(disappeared_blog)]))
 
-            elif len(new_aTag_list) > len(old_aTag_list):
-                new_blog = set(new_aTag_list) - set(old_aTag_list)
-                # print 'diff:'
-                # print new_blog
-                if len(new_blog) == 1:
-                    logger_getter().debug('Yinwang published a new blog...')
-                    mail_send('垠神发表了新博客: '.decode('utf-8') + [_.get_text() for _ in new_aTag_list][0],
-                              [_.get('href') for _ in new_aTag_list][0])
-                else:
-                    logger_getter().debug('Yinwang published more than one new blog...')
-                    mail_send('垠神发表了不止一篇新博客'.decode('utf-8'),
-                              '\n'.join([_.get_text() + ': ' +
-                                         _.get('href') for _ in new_aTag_list[0:len(new_blog)]]))
+        elif len(new_aTag_list) > len(old_aTag_list):
+            new_blog = set(new_aTag_list) - set(old_aTag_list)
+            # print 'diff:'
+            # print new_blog
+            if len(new_blog) == 1:
+                logger_getter().debug('Yinwang published a new blog...')
+                mail_send('垠神发表了新博客: '.decode('utf-8') + [_.get_text() for _ in new_aTag_list][0],
+                          [_.get('href') for _ in new_aTag_list][0])
+            else:
+                logger_getter().debug('Yinwang published more than one new blog...')
+                mail_send('垠神发表了不止一篇新博客'.decode('utf-8'),
+                          '\n'.join([_.get_text() + ': ' +
+                                     _.get('href') for _ in new_aTag_list[0:len(new_blog)]]))
 
-            elif len(new_aTag_list) == len(old_aTag_list):
-                logger_getter().debug('Yinwang do not have a new blog to be published yet!')
-        else:
-            logger_getter().debug('Wait a moment...')
-            time.sleep(1800)
+        elif len(new_aTag_list) == len(old_aTag_list):
+            logger_getter().debug('Yinwang do not have a new blog to be published yet!')
