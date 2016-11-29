@@ -74,9 +74,9 @@ if __name__ == '__main__':
             if len(disappeared_blog) == 1:
                 logger_getter().debug('Yinwang deleted a blog...')
                 mail_send('垠神删除了博客: '.decode('utf-8') + [_.get_text() for _ in old_aTag_list][0], '')
-                else:
-                    logger_getter().debug('Yinwang deleted more than one blog...')
-                    mail_send('垠神删除了不止一篇博客'.decode('utf-8'),
+            else:
+                logger_getter().debug('Yinwang deleted more than one blog...')
+                mail_send('垠神删除了不止一篇博客'.decode('utf-8'),
                               '\n'.join([_.get_text() for _ in old_aTag_list][0:len(disappeared_blog)]))
 
         elif len(new_aTag_list) > len(old_aTag_list):
