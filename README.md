@@ -41,4 +41,6 @@ optional arguments:
 ## Tips
 - `pediy_crawler.py`  
 You can issue the command of `tail -f all.txt |grep your-keywords` to filter
-what you wanna watch.And the filename of `all_tagged.txt` stores all of the thread with one of the tags mentioned in the usage above.
+what you wanna watch.And the filename of `all_tagged.txt` stores all of the thread with one of the tags mentioned in the usage above.  
+The final demo effect is shown as below:  
+![](screenshot/keyword_filter.png)
