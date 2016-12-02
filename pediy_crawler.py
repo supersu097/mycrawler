@@ -21,7 +21,7 @@ class Crawler():
             'div.pagenav td.vbmenu_control')[0].get_text().split(' ')[-2])
 
     def result_output(self, content, filename):
-        print content
+        print content.encode('utf-8')
         with open(filename, 'a+') as f:
             f.write(content.encode('utf-8') + '\n')
 
