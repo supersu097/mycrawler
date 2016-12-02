@@ -47,15 +47,20 @@ class Crawler():
                                            'all_tagged.txt')
             time.sleep(3)
 
+    def keywords_filter(self, keyword):
+        pass
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description="A crawler for the bbs of pediy's Android security forum,"
                     "also you can modify the url to crawl other forum.")
-    parser.add_argument(
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument(
         '-a', '--all',
         action='store_true',
         help='Get all threads and tagged threads of 优秀,精华 and 关注')
+
     args = parser.parse_args()
     crawler = Crawler()
     if args.all:
