@@ -43,4 +43,4 @@ optional arguments:
 You can issue the command of `tail -f all.txt |grep your-keywords` to filter
 what you wanna watch.And the filename of `all_tagged.txt` stores all of the thread with one of the tags mentioned in the usage above.  
 The final demo effect is shown as below:  
-<img> src="screenshot/keyword_filter.png" width="428" height="141"</img>
+<img src="screenshot/keyword_filter.png" width="428" height="141">
