@@ -47,8 +47,6 @@ class Crawler():
                                            'all_tagged.txt')
             time.sleep(3)
 
-    def keywords_filter(self, keyword):
-        pass
 
 
 if __name__ == '__main__':
