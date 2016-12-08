@@ -24,7 +24,8 @@ which means I think that if you have several friends that need to receive the me
 ## Usage
 Once all steps above you have done,just run one of the scripts which show in this repo to wait lots of 1s to see what will happen.
 - `yinwang_blog_reminder.py`   
-No some usage,just run.
+You'd better to resort to a small tool named `cron` to run this crawler.For more
+detailed,see this [commit message]("https://github.com/supersu097/mycrawler/commit/57c4bcd49da88f1c5cda615995acd88013835ece").
 
 - `pediy_crawler.py`
 ```
