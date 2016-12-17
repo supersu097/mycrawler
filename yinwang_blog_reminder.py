@@ -30,8 +30,9 @@ def logger_getter():
     logger = logging.getLogger()
     if not len(logger.handlers):
         logger.setLevel(logging.DEBUG)
-        formatter = logging.Formatter("%(asctime)s - %(levelname)s -%(message)s",
-                                      datefmt='%Y-%m-%d %H:%M:%S')
+        formatter = logging.Formatter(
+            "%(asctime)s - %(levelname)s -%(message)s",
+            datefmt='%Y-%m-%d %H:%M:%S')
         file_handler = logging.FileHandler('record.log')
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(formatter)
@@ -83,7 +84,9 @@ if __name__ == '__main__':
         else:
             logger_getter().debug('Yinwang deleted more than one blog...')
             mail_send('垠神删除了不止一篇博客'.decode('utf-8'),
-                      '\n'.join([_.get_text() + ':' + _.get('href') for _ in disappeared_blog]))
+                      '\n'.join(
+                          [_.get_text() + ':' + _.get('href')
+                           for _ in disappeared_blog]))
         # write new blog source to the local file
         if True:
             blog_source_write(blog_source_get())
@@ -92,15 +95,18 @@ if __name__ == '__main__':
         new_blog = set(new_aTag_list) - set(old_aTag_list)
         if len(new_blog) == 1:
             logger_getter().debug('Yinwang published a new blog...')
-            mail_send('垠神发表了一篇新博客: '.decode('utf-8') + [_.get_text() for _ in new_blog][0],
+            mail_send('垠神发表了一篇新博客: '.decode('utf-8') +
+                      [_.get_text() for _ in new_blog][0],
                       [_.get('href') for _ in new_blog][0])
         else:
             logger_getter().debug('Yinwang published more than one new blog...')
-            mail_send('垠神发表了不止一篇新博客'.decode('utf-8'),
-                      '\n'.join([_.get_text() + ': ' + _.get('href') for _ in new_blog]))
+            mail_send(
+                '垠神发表了不止一篇新博客'.decode('utf-8'),
+                '\n'.join(
+                    [_.get_text() + ': ' + _.get('href') for _ in new_blog]))
 
-        # There is a fucking thing,it should be very very careful use the the functionality of
-        # reformat code in Pycharm when you comment some code
+        # There is a fucking thing,it should be very very careful to use the the functionality of
+        # reformating code in Pycharm since you comment some code
         # write new blog source to the local file
         if True:
             blog_source_write(blog_source_get())
