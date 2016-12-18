@@ -56,11 +56,13 @@ def blog_source_get():
         if os.path.isfile('blog_source.html'):
             return rep_data
         else:
-            logger_getter().debug("It seems that U don't get the blog source yet,just quit...")
+            logger_getter().debug("It seems that U don't get the "
+                                  "blog source yet,just quit...")
             blog_source_write(rep_data)
             exit(0)
     except requests.exceptions.RequestException:
-        logger_getter().debug('Issue of network so that we cannot get the whole page source...')
+        logger_getter().debug('Issue of network so that we cannot '
+                              'get the whole page source...')
         exit(1)
 
 
@@ -105,11 +107,17 @@ if __name__ == '__main__':
                 '\n'.join(
                     [_.get_text() + ': ' + _.get('href') for _ in new_blog]))
 
-        # There is a fucking thing,it should be very very careful to use the the functionality of
-        # reformating code in Pycharm since you comment some code
+        # There is a fucking thing,it should be very very careful to use the
+        # functionality of reformating code in Pycharm since you comment some
+        # code,coz I found Pycharm will change the the position of the origin
+        # code line you commented to a place you don't expect generally its
+        # parent code block but for the plugin of Python-mode in vim seem to no
+        # longer exist such problem,nice~
+
         # write new blog source to the local file
         if True:
             blog_source_write(blog_source_get())
 
     elif len(new_aTag_list) == len(old_aTag_list):
-        logger_getter().debug('Yinwang do not have a new blog to be published yet!')
+        logger_getter().debug('Yinwang do not have a new '
+                              'blog to be published yet!')
