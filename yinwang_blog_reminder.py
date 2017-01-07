@@ -56,13 +56,13 @@ def blog_source_get():
         if os.path.isfile('blog_source.html'):
             return rep_data
         else:
-            logger_getter().debug("It seems that U don't get the "
+            logger_getter().info("It seems that U don't get the "
                                   "blog source yet,and it had pulled one in"
                                   " local filesystem then just quit...")
             blog_source_write(rep_data)
             exit(0)
     except requests.exceptions.RequestException:
-        logger_getter().debug('Issue of network so that we cannot '
+        logger_getter().error('Issue of network so that we cannot '
                               'get the whole page source...')
         exit(1)
 
