@@ -1,1 +1,1 @@
-__all__=['helper']
+__all__=['helper', 'config']

@@ -1,10 +1,10 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # coding=utf-8
 
 import logging
 import smtplib
 from email.mime.text import MIMEText
-import config
+from core import config
 
 def mail_send(subject, mail_body):
     host = 'smtp.126.com'
