@@ -14,7 +14,7 @@ def mail_send(subject, mail_body):
     msg['From'] = config.sender
     msg['To'] = config.receiver
     s = smtplib.SMTP(host, port)
-    s.debuglevel = 1
+    s.debuglevel = 0
     s.login(config.sender, config.pwd)
     s.sendmail(config.sender, config.receiver, msg.as_string())
     s.quit()
