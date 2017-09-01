@@ -10,7 +10,7 @@ def mail_send(subject, mail_body):
     host = 'smtp.126.com'
     port = 25
     msg = MIMEText(mail_body, 'plain', 'utf-8')
-    msg['Subject'] = unicode(subject)
+    msg['Subject'] = subject
     msg['From'] = config.sender
     msg['To'] = config.receiver
     s = smtplib.SMTP(host, port)
