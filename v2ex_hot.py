@@ -15,27 +15,30 @@ def data_paser():
     return json.loads(data)
 
 def id_persistence():
+        with open('id_data.txt', 'w') as f:
+            id_str=''
+            for _ in data_paser():
+                id_str = id_str + str(_['id']) + '\n'
+            f.write(id_str)
+
+def init_check():
     if not os.path.isfile('id_data.txt'):
-        with open('id_data.txt', 'a+') as f:
-            for i in data_paser():
-                f.write(str(i['id']) + '\n')
+        id_persistence()
 
 def check_new():
     if os.path.isfile('id_data.txt'):
         with open('id_data.txt') as f:
-            old_id_list = [_.rstrip() for _ in f.readlines()]
-            new_id_list = [str(_['id']) for _ in data_paser() if str(_['id']) not in old_id_list]
-            
-            """
+            old_id_list = [_.rstrip() for _ in f.readlines()]     
+    new_id_list = [str(_['id']) for _ in data_paser() if str(_['id']) not in old_id_list]
 
-                    for data_collection in data_paser():
-                        for new_id in new_id_list:
-                            if new_id == str(data_collection['id']):
-                                helper.mail_send('V2ex: ' + data_collection['title'],
-                                        data_collection['url'])
-               """
-            print(data_paser())
+    if len(new_id_list) != 0:
+        id_persistence()    
+        for data_collection in data_paser():
+            for new_id in new_id_list:
+                if new_id == str(data_collection['id']):
+                    helper.mail_send('V2ex: ' + data_collection['title'],
+                            data_collection['url'])
 
 if __name__ == '__main__':
-    id_persistence()
+    init_check()
     check_new()
