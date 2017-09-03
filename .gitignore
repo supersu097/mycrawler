@@ -93,3 +93,4 @@ config.py
 blog_source.html
 tmp/
 test.py
+.idea/
