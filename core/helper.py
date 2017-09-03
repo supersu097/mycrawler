@@ -7,10 +7,13 @@ import smtplib
 from selenium import webdriver
 from email.mime.text import MIMEText
 from core import config
+import time
 
 CURR_PATH = os.path.abspath('.')
 TEMP_DIR = CURR_PATH + '/' + 'tmp'
 
+def date_getter():
+    return time.strftime("%m-%d", time.localtime())
 
 def make_screenshot(url,filename):
     driver = webdriver.PhantomJS(executable_path=CURR_PATH + '/core/phantomjs-2.1.1')
