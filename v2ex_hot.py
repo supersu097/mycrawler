@@ -48,7 +48,7 @@ def hourly_check():
                 if new_id == str(data_collection['id']):
                     mail_body.append(data_collection['title'] + ': ' +
                                      data_collection['url'])
-        helper.mail_send('V2EX Update!','\n'.join(mail_body))
+        helper.mail_send('V2exHot Update!','\n'.join(mail_body))
         helper.logger_getter().info('V2ex has new hot posts.')
     else:
         helper.logger_getter().info('V2ex has no new hot post.')
