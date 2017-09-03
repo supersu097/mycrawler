@@ -47,6 +47,7 @@ def hourly_check():
                 if new_id == str(data_collection['id']):
                     helper.mail_send('V2ex: ' + data_collection['title'],
                                      data_collection['url'])
+                    helper.logger_getter().info('V2ex has new hot post.')
 
 
 # It's suitable for hourly check in cron job
