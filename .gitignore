@@ -89,8 +89,8 @@ ENV/
 .ropeproject
 config.py
 *.log
-*.txt
 blog_source.html
 tmp/
 test.py
+test.txt
 .idea/
