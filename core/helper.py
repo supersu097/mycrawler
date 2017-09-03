@@ -12,16 +12,9 @@ import time
 CURR_PATH = os.path.abspath('.')
 TEMP_DIR = CURR_PATH + '/' + 'tmp'
 
+
 def date_getter():
     return time.strftime("%m-%d", time.localtime())
-
-def make_screenshot(url,filename):
-    driver = webdriver.PhantomJS(executable_path=CURR_PATH + '/core/phantomjs-2.1.1')
-    driver.get(url)
-    driver.execute_script('document.body.style.background = "white"')
-    driver.implicitly_wait(20)
-    driver.save_screenshot(filename)
-    driver.quit()
 
 
 def dir_check(dir):
