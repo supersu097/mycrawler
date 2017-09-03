@@ -91,3 +91,5 @@ config.py
 *.log
 *.txt
 blog_source.html
+tmp/
+test.py
