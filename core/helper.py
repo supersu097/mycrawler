@@ -4,15 +4,27 @@
 import os
 import logging
 import smtplib
+from selenium import webdriver
 from email.mime.text import MIMEText
 from core import config
 
 CURR_PATH = os.path.abspath('.')
 TEMP_DIR = CURR_PATH + '/' + 'tmp'
 
+
+def make_screenshot(url,filename):
+    driver = webdriver.PhantomJS(executable_path=CURR_PATH + '/core/phantomjs-2.1.1')
+    driver.get(url)
+    driver.execute_script('document.body.style.background = "white"')
+    driver.implicitly_wait(20)
+    driver.save_screenshot(filename)
+    driver.quit()
+
+
 def dir_check(dir):
     if not os.path.isdir(dir):
         os.mkdir(dir)
+
 
 def mail_send(subject, mail_body):
     host = 'smtp.126.com'
