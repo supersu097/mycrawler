@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding=utf-8
 # Created by sharp.gan at 2016-11-30
 import re
@@ -21,7 +21,7 @@ class Crawler():
             'div.pagenav td.vbmenu_control')[0].get_text().split(' ')[-2])
 
     def result_output(self, content, filename):
-        print content.encode('utf-8')
+        print(content.encode('utf-8'))
         with open(filename, 'a+') as f:
             f.write(content.encode('utf-8') + '\n')
 
