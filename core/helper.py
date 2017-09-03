@@ -10,9 +10,9 @@ from core import config
 CURR_PATH = os.path.abspath('.')
 TEMP_DIR = CURR_PATH + '/' + 'tmp'
 
-def create_temp_dir():
-    if not os.path.isdir(TEMP_DIR):
-        os.mkdir(TEMP_DIR)
+def dir_check(dir):
+    if not os.path.isdir(dir):
+        os.mkdir(dir)
 
 def mail_send(subject, mail_body):
     host = 'smtp.126.com'
@@ -35,7 +35,7 @@ def logger_getter():
         formatter = logging.Formatter(
             "%(filename)s - %(asctime)s - %(levelname)s -%(message)s",
             datefmt='%Y-%m-%d %H:%M:%S')
-        create_temp_dir()
+        dir_check(TEMP_DIR)
         file_handler = logging.FileHandler(TEMP_DIR + '/' + 'record.log')
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(formatter)
