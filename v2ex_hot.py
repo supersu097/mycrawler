@@ -42,18 +42,20 @@ def hourly_check():
     # if new_id_list is not 0 which means new hot post occurs
     if len(new_id_list) != 0:
         id_persistence()
+        mail_body = []
         for data_collection in data_get():
             for new_id in new_id_list:
                 if new_id == str(data_collection['id']):
-                    helper.mail_send('V2ex: ' + data_collection['title'],
+                    mail_body.append(data_collection['title'] + ': ' +
                                      data_collection['url'])
-                    helper.logger_getter().info('V2ex has new hot post.')
-
+        helper.mail_send('V2EX Update!','\n'.join(mail_body))
+        helper.logger_getter().info('V2ex has new hot posts.')
+    else:
+        helper.logger_getter().info('V2ex has no new hot post.')
 
 # It's suitable for hourly check in cron job
 def daily_check():
     helper.mail_send('V2EX每日热点', '')
-
 
 if __name__ == '__main__':
     hourly_check()
