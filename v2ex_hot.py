@@ -7,14 +7,16 @@ import json
 import requests
 import os
 from core import helper
-import argparse
-
-hot_url = 'https://www.v2ex.com/api/topics/hot.json'
 
 
 def data_paser():
-    data = requests.get(hot_url).text
-    return json.loads(data)
+    hot_url = 'https://www.v2ex.com/api/topics/hot.json'
+    try:
+        data = requests.get(hot_url).text
+        return json.loads(data)
+    except requests.exceptions.ConnectionError:
+        helper.logger_getter().error('network connection error!')
+        exit(1)
 
 
 def id_persistence():
@@ -49,7 +51,7 @@ def hourly_check():
 
 # It's suitable for hourly check in cron job
 def daily_check():
-    helper.mail_send('V2EX每日热点', )
+    helper.mail_send('V2EX每日热点', '')
 
 
 if __name__ == '__main__':
