@@ -1,10 +1,18 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding=utf-8
 
+import os
 import logging
 import smtplib
 from email.mime.text import MIMEText
 from core import config
+
+CURR_PATH = os.path.abspath('.')
+TEMP_DIR = CURR_PATH + '/' + 'tmp'
+
+def create_temp_dir():
+    if not os.path.isdir(TEMP_DIR):
+        os.mkdir(TEMP_DIR)
 
 def mail_send(subject, mail_body):
     host = 'smtp.126.com'
@@ -14,7 +22,7 @@ def mail_send(subject, mail_body):
     msg['From'] = config.sender
     msg['To'] = config.receiver
     s = smtplib.SMTP(host, port)
-    s.debuglevel = 0
+    s.debuglevel = 1
     s.login(config.sender, config.pwd)
     s.sendmail(config.sender, config.receiver, msg.as_string())
     s.quit()
@@ -25,9 +33,10 @@ def logger_getter():
     if not len(logger.handlers):
         logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter(
-            "%(asctime)s - %(levelname)s -%(message)s",
+            "%(filename)s - %(asctime)s - %(levelname)s -%(message)s",
             datefmt='%Y-%m-%d %H:%M:%S')
-        file_handler = logging.FileHandler('record.log')
+        create_temp_dir()
+        file_handler = logging.FileHandler(TEMP_DIR + '/' + 'record.log')
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
