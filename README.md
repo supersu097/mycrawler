@@ -71,6 +71,6 @@ optional arguments:
 ## Tips
 ### `pediy_crawler.py`
 You can issue the command of `tail -f all.txt |grep your-keywords` to filter
-what you wanna watch.One more thing, the text file of `all_tagged.txt` stores all of the threads with one of the tags mentioned in the usage above and the `all.txt` stores all of the threads in the forum which you specify.
+what you wanna watch.One more thing, the text file of `all_tagged.txt` stores all of the threads with one of the tags mentioned in the usage above and the `all.txt` stores all of the threads in the forum which you specify. And the more important is the display of whole filtering result is dynamic.  
 The final demo effect is shown as below:  
-<img src="screenshot/keyword_filter.png" width="428" height="141">
+<img src="screenshot/keyword_filter.png" width="428" height="141">`
