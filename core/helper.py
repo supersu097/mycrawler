@@ -4,7 +4,6 @@
 import os
 import logging
 import smtplib
-from selenium import webdriver
 from email.mime.text import MIMEText
 from core import config
 import time
