@@ -88,7 +88,6 @@ ENV/
 # Rope project settings
 .ropeproject
 config.py
-*.log
 blog_source.html
 tmp/
 test.py
