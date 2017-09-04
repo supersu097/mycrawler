@@ -42,7 +42,8 @@ def check_new(option):
                 os.system("git commit -m 'backup yinwang blog'")
                 os.system('git push origin master')
 
-
+        else:
+            helper.logger_getter.info('Yin did not publish any blog yet!')
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Help you push the screenshot to the folk of ur own repo.')
