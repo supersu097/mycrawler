@@ -1,17 +1,23 @@
 # mycrawler
- A series of crawlers written in py which make my life more comfortable  
+ A series of crawlers written in py which make my life better  
 
 ## Overview
 - `yinwang_blog_reminder.py`  
-Whatever Yinwang publish or delete one or more blog,you can always get to be known
-by the Email you set.
+Know when Mr. Yinwang publish a blog in the very first place by the Email you set.
 
 - `pediy_crawler.py`  
 A crawler for the bbs of pediy's Android security forum,also you can modify the URL to crawl other forums.
 
+- `v2ex_hot.py`  
+Let you know what is the trend and what is the most popular and hottest.
+
+## Recommanded&Tested Working Env
+- Ubuntu 14.04|16.04 x64
+- Python3
+
 ## Prerequisite 
 Execute the command below to solve the dependency:  
-`sudo pip install -r requirement.txt`  
+`sudo pip3 install -r requirement.txt`  
 Whether for some personal reasons or others,it is very highly recommended to leverage the advantage of `virtualenv` to avoid some unnecessary pain from your local python environment.Just now,one of my colleagues encountered a strange problem then I fix it by using the virtualenv.
 
 ## Configuration & Notice 
@@ -23,11 +29,26 @@ which means I think that if you have several friends that need to receive the me
 
 ## Usage
 Once all steps above you have done,just run one of the scripts which show in this repo to wait lots of 1s to see what will happen.
-- `yinwang_blog_reminder.py`   
-You'd better to resort to a small tool named `cron` to run this crawler.  
+### `yinwang_blog_reminder.py` 
+- You'd better to resort to a small tool named `cron` to run this crawler.   
 For more detailed,see this [commit message](https://github.com/supersu097/mycrawler/commit/57c4bcd49da88f1c5cda615995acd88013835ece).
+Additionally, i also implemented making screenshot in order to backup it for the future thinking, coz as we all know that, Mr. Yinwang ... Below is how to use,
 
-- `pediy_crawler.py`
+```
+usage: yinwang_blog_reminder.py [-h] [-p]
+tu
+Help you push the screenshot to the folk of ur own repo.
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -p, --push  Decide whether push the screenshot to github repo or not!
+```
+- Cron task example
+```
+@daily cd ~/mycrawler && python3 yinwang_blog_reminder.py -p
+```
+
+### `pediy_crawler.py`
 ```
 usage: pediy_crawler.py [-h] -a
 
@@ -38,9 +59,14 @@ optional arguments:
   -h, --help  show this help message and exit
   -a, --all   Get all threads and tagged threads of 优秀,精华 and 关注
 ```
+### `v2ex_hot.py`
+- Nothing special to emphasize, just utilize `cron` like below,
+```
+0 10,22 * * *	cd ~/mycrawler && python3 v2ex_hot.py
+```
 
 ## Tips
-- `pediy_crawler.py`  
+### `pediy_crawler.py`
 You can issue the command of `tail -f all.txt |grep your-keywords` to filter
 what you wanna watch.One more thing, the text file of `all_tagged.txt` stores all of the threads with one of the tags mentioned in the usage above and the `all.txt` stores all of the threads in the forum which you specify.
 The final demo effect is shown as below:  
