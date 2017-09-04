@@ -3,7 +3,7 @@
 
 ## Overview
 - `yinwang_blog_reminder.py`  
-Know when Mr. Yinwang publish a blog in the very first place by the Email you set.
+Know when Mr. Yinwang publish a blog in the very first place by the Email you set, which also depends on ur `cron` setting.
 
 - `pediy_crawler.py`  
 A crawler for the bbs of pediy's Android security forum,also you can modify the URL to crawl other forums.
@@ -18,14 +18,17 @@ Let you know what is the trend and what is the most popular and hottest.
 ## Prerequisite 
 Execute the command below to solve the dependency:  
 `sudo pip3 install -r requirement.txt`  
-Whether for some personal reasons or others,it is very highly recommended to leverage the advantage of `virtualenv` to avoid some unnecessary pain from your local python environment.Just now,one of my colleagues encountered a strange problem then I fix it by using the virtualenv.
 
-## Configuration & Notice 
-You need to create a file named `config.py` with three required fields of `sender` `receiver` and `pwd`.Their data type is all the String.And it's also important to know that not one of them can be dispensed with.The value of sender and receiver are the respective Email address as their literal meaning representing. First of all,for the field of a sender,I use the Email service provider of 126.com as the sender.And all about the sender you should know is that you need to allow the POP3/SMTP/IMAP service in the system setting page and remember the URL of the SMTP server such as smtp.126.com.Next,about the field of receiver mentioned above,it is:  
-```
-A list of addresses to send this mail to. A bare string will be treated as a list with 1 address.
-```
-which means I think that if you have several friends that need to receive the message from you,the field of receiver's data type should be a List with String.Finally,the field of `pwd` is an auth code for mail.126.com in this circumstance for me.
+
+## Configuration 
+You must create a file named `config.py` in the directory of `core`with below fields.  
+
+| Filed | Mandatory | Var Type | Desc |
+| ----| ---- | ---- | ---- |
+| sender | Y | String | E-mail address |
+| receiver | Y | String or List with Strings | E-mail address |
+| pwd | Y | String | E-mail's password |
+
 
 ## Usage
 Once all steps above you have done,just run one of the scripts which show in this repo to wait lots of 1s to see what will happen.
