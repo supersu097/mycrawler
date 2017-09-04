@@ -8,7 +8,7 @@ import argparse
 from bs4 import BeautifulSoup
 
 
-class Crawler():
+class Crawler:
     url = "http://bbs.pediy.com/forumdisplay.php?f=161&order=desc&page="
 
     def soup_getter(self, page_num):
