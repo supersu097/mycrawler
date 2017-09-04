@@ -45,7 +45,7 @@ def hourly_check():
         helper.logger_getter().info('V2ex has no new hot post.')
 
 
-# It's suitable for hourly check in cron job
+# It's suitable for daily check in cron job
 def daily_check():
     helper.mail_send('V2EX每日热点', '')
 
