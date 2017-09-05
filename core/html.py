@@ -42,10 +42,10 @@ def first_a_tag_extract(page_source, rule):
     return first_url
 
 
-def first_url_persistence(first_url, filename):
+def first_url_persistence(write_content, filename):
     helper.dir_check(helper.TEMP_DIR)
     with open(helper.TEMP_DIR + filename, 'w') as f:
-        f.write(first_url.get('href'))
+        f.write(write_content)
 
 
 def make_screenshot(url, filename):
