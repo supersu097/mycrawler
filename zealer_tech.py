@@ -1,16 +1,33 @@
 #!/usr/bin/env python3
 # coding=utf-8
-from core import helper
+
+import os
 from core import html
-from bs4 import BeautifulSoup
+from core import helper
 
 zealer_tech = 'http://www.zealer.com:8080/list?cp=2'
-first_aTag=html.first_a_tag_extract(zealer_tech, 'li.series_item a', pageType='special')
+page_source=html.page_source_get(zealer_tech, pagetype='special')
+first_aTag = html.first_a_tag_extract(page_source, 'li.series_item a')
 
-soup = BeautifulSoup(""""<a class="series_itemImg" href="/post/2095" target="_blank"><div class="show_img global_play">
-<img src="http://img0.zealer.com/e4/8c/e0/95b6c2943f311c997b0f5d6329.jpg"/> <span class="list_cover"></span>
-<span class="left_line"></span> <span class="right_line"></span> <span class="list_play">播放</span></div>
-<p class="series_subTitle">「科技相对论」对话小米：智能家居的未来</p></a>""",'html5lib')
-tag = soup.a.p.get_text()
+video_href =first_aTag.get('href')
+video_url = 'http://www.zealer.com:8080' + video_href
+video_title = first_aTag.text.split(' ')[-1]
+temp_data= helper.TEMP_DIR + '/zealer_tech.txt'
 
+def check_new():
+    if not os.path.isfile(temp_data):
+        html.first_url_persistence(video_href, '/zealer_tech.txt')
+        helper.logger_getter().info("First init to store the url of the first video!")
+        exit(0)
+    with open(temp_data) as f:
+        # if new first url doesn't equal to the record one, upgrade it first!
+        if video_href != f.readline():
+            helper.logger_getter().info('Zealer published a new video!')
+            helper.logger_getter().info('Renew the first url in the file')
+            html.first_url_persistence(video_href, '/zealer_tech.txt')
+            helper.mail_send('Zealer发了新视频: ' + video_title, video_url)
+        else:
+            helper.logger_getter().info('Zealer did not publish any new video yet!')
 
+if __name__ == '__main__':
+    check_new()
