@@ -11,6 +11,9 @@ A crawler for the bbs of pediy's Android security forum,also you can modify the 
 - `v2ex_hot.py`  
 Let you know what is the trend and what is the most popular and hottest.
 
+- `zealer_tech.py`  
+Know when zealer publishes a new video in [this](http://www.zealer.com:8080/list?cp=2) series.
+
 ## Recommanded&Tested Working Env
 - Ubuntu 14.04|16.04 x64
 - Python3
