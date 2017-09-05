@@ -10,21 +10,21 @@ from core import html
 yinwang_blog = 'http://www.yinwang.org/'
 page_source = html.page_source_get(yinwang_blog)
 first_aTag = html.first_a_tag_extract(page_source, 'ul.list-group li a')
-
+page_href=first_aTag.get('href')
+blog_url = 'http://www.yinwang.org' + page_href
+blog_title = first_aTag.get_text().strip()
 
 def check_new(option):
     if not os.path.isfile(helper.TEMP_DIR + '/yinBlog.txt'):
-        html.first_url_persistence(first_aTag.get('href'), '/yinBlog.txt')
+        html.first_url_persistence(page_href, '/yinBlog.txt')
         helper.logger_getter().info("First init to store the url of the first post!")
         exit(0)
     with open(helper.TEMP_DIR + '/yinBlog.txt') as f:
         # if new first url doesn't equal to the record one, upgrade it first!
-        if first_aTag.get('href') != f.readline():
+        if page_href != f.readline():
             helper.logger_getter().info('Yinwang published a new blog!')
             helper.logger_getter().info('Renew the first url in the file')
-            html.first_url_persistence(first_aTag.get('href'), '/yinBlog.txt')
-            blog_url = 'http://www.yinwang.org' + first_aTag.get('href')
-            blog_title = first_aTag.get_text().strip()
+            html.first_url_persistence(page_href, '/yinBlog.txt')
             helper.mail_send('垠神发表了新Blog: ' + blog_title, blog_url)
 
             # begin making screenshot
