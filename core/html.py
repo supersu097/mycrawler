@@ -12,23 +12,40 @@ from selenium import webdriver
 from core import helper
 
 
-def page_source_get(url):
-    try:
-        rep_data = requests.get(url).text
-        if url.split('.')[-1] == 'json':
-            return json.loads(rep_data)
-        else:
-            return rep_data
+def page_source_get(url, pagetype=None):
+    def source_get_by_phantomjs():
+        driver = webdriver.PhantomJS(executable_path=helper.CURR_PATH + '/core/phantomjs-2.1.1')
+        driver.get(url)
+        driver.implicitly_wait(20)
+        source = driver.page_source
+        driver.quit()
+        return source
 
-    except requests.exceptions.RequestException:
-        helper.logger_getter().error('Network connection error')
-        exit(1)
+    if pagetype is not None:
+        return source_get_by_phantomjs()
+    else:
+        try:
+            rep_data = requests.get(url).text
+            if url.split('.')[-1] == 'json':
+                return json.loads(rep_data)
+            else:
+                return rep_data
+
+        except requests.exceptions.RequestException:
+            helper.logger_getter().error('Network connection error')
+            exit(1)
 
 
-def first_aTag_extract(url, rule):
-    soup = BeautifulSoup(page_source_get(url), 'html5lib')
-    firstURL = soup.select(rule)[0]
-    return firstURL
+def first_a_tag_extract(page_source, rule):
+    soup = BeautifulSoup(page_source, 'html5lib')
+    first_url = soup.select(rule)[0]
+    return first_url
+
+
+def first_url_persistence(first_url, filename):
+    helper.dir_check(helper.TEMP_DIR)
+    with open(helper.TEMP_DIR + filename, 'w') as f:
+        f.write(first_url.get('href'))
 
 
 def make_screenshot(url, filename):
