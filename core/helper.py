@@ -16,9 +16,9 @@ def date_getter():
     return time.strftime("%m-%d", time.localtime())
 
 
-def dir_check(dir):
-    if not os.path.isdir(dir):
-        os.mkdir(dir)
+def dir_check(user_dir):
+    if not os.path.isdir(user_dir):
+        os.mkdir(user_dir)
 
 
 def mail_send(subject, mail_body):
