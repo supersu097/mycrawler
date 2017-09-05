@@ -38,7 +38,7 @@ def mail_send(subject, mail_body):
 def logger_getter():
     logger = logging.getLogger()
     if not len(logger.handlers):
-        logger.setLevel(logging.DEBUG)
+        logger.setLevel(logging.INFO)
         formatter = logging.Formatter(
             "%(filename)s - %(asctime)s - %(levelname)s -%(message)s",
             datefmt='%Y-%m-%d %H:%M:%S')
