@@ -22,7 +22,7 @@ def hourly_check():
     # if no txt file existing, first init
     if not os.path.isfile(helper.TEMP_DIR + '/v2ex_id_data.txt'):
         id_persistence()
-        helper.logger_getter().debug('First init to store id data,exit!')
+        helper.logger_getter().info('First init to store id data,exit!')
         exit(0)
 
     # read previous v2ex_id_data.txt and compare
