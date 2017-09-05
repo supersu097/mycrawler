@@ -28,8 +28,9 @@ def check_new(option):
             helper.mail_send('垠神发表了新Blog: ' + blog_title, blog_url)
 
             # begin making screenshot
-            helper.dir_check(helper.CURR_PATH + '/tmp/yinblog_back')
-            html.make_screenshot(blog_url, helper.CURR_PATH + '/yinblog_back/' + blog_title + '.png')
+            backup_path = helper.CURR_PATH + '/yinblog_back/'
+            helper.dir_check(backup_path)
+            html.make_screenshot(blog_url, backup_path + blog_title + '.png')
 
 
             # decide whether push the screenshot to github repo or not
