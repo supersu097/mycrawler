@@ -19,8 +19,12 @@ Know when zealer publishes a new video in [this](http://www.zealer.com:8080/list
 - Python3
 
 ## Prerequisite 
-Execute the command below to solve the dependency:  
+- Execute the command below to solve the dependency:  
 `sudo pip3 install -r requirement.txt`  
+
+- For normally invoking phantomjs, you have to check if you have installed below pkg already,  
+`sudo apt-get install libfontconfig1`
+
 
 
 ## Configuration 
