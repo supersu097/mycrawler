@@ -43,7 +43,7 @@ Additionally, i also implemented making screenshot in order to backup it for the
 ```
 usage: yinwang_blog_reminder.py [-h] [-p]
 tu
-Help you push the screenshot to the folk of ur own repo.
+Help you push the screenshot to ur folk of this repo.
 
 optional arguments:
   -h, --help  show this help message and exit
