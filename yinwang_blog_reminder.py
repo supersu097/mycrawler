@@ -36,14 +36,15 @@ def check_new(option):
             # decide whether push the screenshot to github repo or not
             if option:
                 os.system('git add .')
-                os.system("git commit -m 'backup yinwang blog'")
+                os.system("git commit -m 'auto backup yinwang"
+                          " blog - {}'".format(helper.date_getter()))
                 os.system('git push origin master')
 
         else:
             helper.logger_getter().info('Yin did not publish any blog yet!')
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='Help you push the screenshot to the folk of ur own repo.')
+        description='Help you push the screenshot to ur folk of this repo.')
     parser.add_argument(
         '-p', '--push',
         action='store_true',
