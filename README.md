@@ -14,6 +14,9 @@ Let you know what is the trend and what is the most popular and hottest.
 - `zealer_tech.py`  
 Know when zealer publishes a new video in [this](http://www.zealer.com:8080/list?cp=2) series.
 
+- `v2ex_notification.py`  
+Make you keep in touch with gays on a way2explore community, V2EX
+
 ## Recommanded&Tested Working Env
 - Ubuntu 14.04|16.04 x64
 - Python3
@@ -35,7 +38,8 @@ You must create a file named `config.py` in the directory of `core`with below fi
 | sender | Y | String | E-mail address |
 | receiver | Y | String or List with Strings | E-mail address |
 | pwd | Y | String | E-mail's password |
-
+| v2_notification | Y | String | V2's Atom Feed URL
+| v2_username | Y | String | Notify only related to you
 
 ## Usage
 Once all steps above you have done,just run one of the scripts which show in this repo to wait lots of 1s to see what will happen.
