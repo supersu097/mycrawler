@@ -37,7 +37,7 @@ def check_new():
 
             # This maybe indicates a plain comment to you.
             if len(contents) == 1:
-                user_content=re.match(r'^\[CDATA\[\s*(.*)\s*\]\]$',contents[0]).group(1)
+                user_content=re.match(r'^.*\s*(.*)\s*.*$',contents[0]).group(1)
                 helper.mail_send(title, user_content + '\n' + link)
                 helper.logger_getter().info('Someone on V2ex has a direct reply 4 you')
                 is_updated = True
