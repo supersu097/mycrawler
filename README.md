@@ -15,7 +15,7 @@ Let you know what is the trend and what is the most popular and hottest.
 Know when zealer publishes a new video in [this](http://www.zealer.com:8080/list?cp=2) series.
 
 - `v2ex_notification.py`  
-Make you keep in touch with gays on a way2explore community, V2EX
+Make you keep in touch with gu(a)ys on a way2explore community, V2EX
 
 ## Recommanded&Tested Working Env
 - Ubuntu 14.04|16.04 x64
