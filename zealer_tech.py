@@ -24,7 +24,7 @@ def data_persistence():
 def check_new():
 
     with open(temp_data) as f:
-        old_hrefs_list = [i.split('')[0] for i in f.readlines()]
+        old_hrefs_list = [i.split()[0] for i in f.readlines()]
 
     new_videos = [i for i in videos_aTags if i.get('href') not in old_hrefs_list]
     if len(new_videos) == 0:
