@@ -24,7 +24,7 @@ def data_persistence():
 
 def check_new():
     with open(temp_data) as f:
-        previous_data_format = [i.split()[0] for i in f.readlines()]
+        previous_data_format = [i.split('\n')[0] for i in f.readlines()]
 
     new_notification = [i for i in timestamps_class if i.text not in previous_data_format]
 
