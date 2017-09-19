@@ -39,7 +39,6 @@ You must create a file named `config.py` in the directory of `core`with below fi
 | receiver | Y | String or List with Strings | E-mail address |
 | pwd | Y | String | E-mail's password |
 | v2_notification | Y | String | V2's Atom Feed URL
-| v2_username | Y | String | Notify only related to you
 
 ## Usage
 Once all steps above you have done,just run one of the scripts which show in this repo to wait lots of 1s to see what will happen.
