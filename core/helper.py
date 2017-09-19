@@ -21,7 +21,7 @@ def dir_check(user_dir):
         os.mkdir(user_dir)
 
 
-def mail_send(subject, mail_body):
+def mail_send(subject, mail_body=''):
     host = 'smtp.126.com'
     port = 25
     msg = MIMEText(mail_body, 'plain', 'utf-8')
