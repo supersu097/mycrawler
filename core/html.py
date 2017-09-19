@@ -7,7 +7,6 @@ import json
 import random
 
 import requests
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
@@ -51,18 +50,6 @@ def page_source_get(url, pagetype=None):
         except requests.exceptions.RequestException:
             helper.logger_getter().error('Network connection error')
             exit(1)
-
-
-def first_a_tag_extract(page_source, rule):
-    soup = BeautifulSoup(page_source, 'html5lib')
-    first_url = soup.select(rule)[0]
-    return first_url
-
-
-def first_url_persistence(write_content, filename):
-    helper.dir_check(helper.TEMP_DIR)
-    with open(helper.TEMP_DIR + filename, 'w') as f:
-        f.write(write_content)
 
 
 def make_screenshot(url, filename):
