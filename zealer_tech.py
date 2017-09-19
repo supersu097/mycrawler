@@ -30,10 +30,12 @@ def check_new():
     if len(new_videos) == 0:
         helper.logger_getter().info('Zealer did not publish any new video yet!')
     else:
-        helper.mail_send(helper.date_getter() + '  Zealer发了新视频')
-        helper.logger_getter().info('Zealer published new video!')
-        data_persistence()
+        msg_content='Zealer published new video!'
+        helper.logger_getter().info(msg_content)
+        helper.mail_send(helper.date_getter() +'  ' + msg_content,msg_content)
         helper.logger_getter().info("Renew the videos' href in the file")
+        data_persistence()
+
 
 
 
