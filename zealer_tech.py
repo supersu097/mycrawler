@@ -39,7 +39,7 @@ def check_new():
 
 if __name__ == '__main__':
     if not os.path.isfile(temp_data):
-        data_persistence()
         helper.logger_getter().info("First init to store all videos' href!")
+        data_persistence()
         exit(0)
     check_new()
