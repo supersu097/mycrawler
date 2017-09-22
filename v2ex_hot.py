@@ -35,8 +35,8 @@ def check_new():
     if len(new_id_list) != 0:
         id_persistence()
         mail_body = []
-        for data_collection in html.page_source_get(hot_url):
-            for new_id in new_id_list:
+        for new_id in new_id_list:
+            for data_collection in html.page_source_get(hot_url):
                 if new_id == str(data_collection['id']):
                     mail_body.append(data_collection['title'] + ': ' +
                                      data_collection['url'])
