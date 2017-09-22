@@ -9,10 +9,10 @@ from core import helper
 from core import html
 
 zealer_tech = 'http://www.zealer.com:8080/list?cp=2'
-page_source=html.page_source_get(zealer_tech, pagetype='special')
+page_source = html.page_source_get(zealer_tech, pagetype='special')
 soup = BeautifulSoup(page_source, 'html5lib')
 videos_aTags = soup.select('li.series_item a')
-temp_data= helper.TEMP_DIR + '/zealer_tech.txt'
+temp_data = helper.TEMP_DIR + '/zealer_tech.txt'
 
 
 def data_persistence():
@@ -22,7 +22,6 @@ def data_persistence():
 
 
 def check_new():
-
     with open(temp_data) as f:
         old_hrefs_list = [i.split('\n')[0] for i in f.readlines()]
 
@@ -30,13 +29,16 @@ def check_new():
     if len(new_videos) == 0:
         helper.logger_getter().info('Zealer did not publish any new video yet!')
     else:
-        msg_content='Zealer published new video!'
+        msg_content = 'Zealer published new video!'
         helper.logger_getter().info(msg_content)
-        helper.mail_send(helper.date_getter() +'  ' + msg_content,msg_content)
+        # Notice the order here of two 'for' loop
+        for i in new_videos:
+            for j in videos_aTags:
+                if i.get('href') == j.get('href'):
+                    helper.mail_send(helper.date_getter() + '  '
+                                     + msg_content, j.find('p').get_text())
         helper.logger_getter().info("Renew the videos' href in the file")
         data_persistence()
-
-
 
 
 if __name__ == '__main__':
