@@ -35,7 +35,7 @@ def check_new(option):
             blog_title = i.get_text()
             helper.logger_getter().info(msg_content)
             helper.mail_send(helper.date_getter() + '  ' + msg_content + ':' + blog_title, blog_url)
-            helper.dir_check(helper.CURR_PATH + 'yinblog_back')
+            helper.dir_check(helper.CURR_PATH + '/yinblog_back')
             html.make_screenshot(blog_url, helper.CURR_PATH + '/yinblog_back/' +  blog_title + '.png')
         data_persistence()
 
