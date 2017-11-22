@@ -39,8 +39,8 @@ def check_new():
 
     else:
         current_time = time.strftime("%m-%d|%H:%M", time.localtime())
-        msg_content = '  V2ex has a new notification for you.'
-        helper.mail_send(current_time+msg_content, msg_content + '\n' + '\n'.join(new_notification))
+        msg_content = 'V2ex has a new notification for you.'
+        helper.mail_send(current_time + '  '+ msg_content, msg_content)
         helper.logger_getter().info(msg_content)
         data_persistence()
         helper.logger_getter().info('Renew the data file')
