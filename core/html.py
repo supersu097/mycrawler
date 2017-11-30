@@ -6,6 +6,7 @@
 import json
 import random
 import time
+
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -40,7 +41,7 @@ def page_source_get(url, pagetype=None):
     if pagetype is not None:
         return source_get_by_phantomjs()
     else:
-	for _ in range(3):
+        for _ in range(3):
             try:
                 seconds = random.choice([i / 10 for i in range(35, 82)])
                 rep_data = requests.get(url, headers=headers).text
@@ -49,10 +50,11 @@ def page_source_get(url, pagetype=None):
                 else:
                     return rep_data
             except requests.exceptions.RequestException as e:
-            	helper.logger_getter.debug('Exception: ' + str(e))
-            	helper.logger_getter.debug(url)
-            	helper.logger_getter.debug('Sleep for ' + str(seconds) + 's after timeout...')
-            	time.sleep(seconds)
+                helper.logger_getter.debug('Exception: ' + str(e))
+                helper.logger_getter.debug(url)
+                helper.logger_getter.debug('Sleep for ' + str(seconds) + 's after timeout...')
+                time.sleep(seconds)
+
 
 def make_screenshot(url, filename):
     driver = webdriver.PhantomJS(executable_path=helper.CURR_PATH + '/core/phantomjs-2.1.1')
