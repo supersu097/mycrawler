@@ -21,20 +21,6 @@ def dir_check(user_dir):
         os.mkdir(user_dir)
 
 
-def mail_send(subject, mail_body=''):
-    host = 'smtp.126.com'
-    port = 25
-    msg = MIMEText(mail_body, 'plain', 'utf-8')
-    msg['Subject'] = subject
-    msg['From'] = config.sender
-    msg['To'] = config.receiver
-    s = smtplib.SMTP(host, port)
-    s.debuglevel = 0
-    s.login(config.sender, config.pwd)
-    s.sendmail(config.sender, config.receiver, msg.as_string())
-    s.quit()
-
-
 def logger_getter():
     logger = logging.getLogger()
     if not len(logger.handlers):
@@ -53,3 +39,22 @@ def logger_getter():
         console_handler.setFormatter(formatter)
         logger.addHandler(console_handler)
     return logger
+
+
+def mail_send(subject, mail_body=''):
+    try:
+        host = 'smtp.126.com'
+        port = 25
+        msg = MIMEText(mail_body, 'plain', 'utf-8')
+        msg['Subject'] = subject
+        msg['From'] = config.sender
+        msg['To'] = config.receiver
+        s = smtplib.SMTP(host, port)
+        s.debuglevel = 0
+        s.login(config.sender, config.pwd)
+        s.sendmail(config.sender, config.receiver, msg.as_string())
+        s.quit()
+    except smtplib.SMTPException as e:
+        logger_getter().error(str(e))
+
+
