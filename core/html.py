@@ -10,33 +10,33 @@ import time
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-
+from user_agent import generate_user_agent
 from core import helper
 
 
 def page_source_get(url, pagetype=None):
-    USER_AGENTS = [
-        "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
-        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)",
-        "Mozilla/4.0 (compatible; MSIE 7.0; AOL 9.5; AOLBuild 4337.35; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
-        "Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)",
-        "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)",
-        "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)",
-        "Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 3.0.04506.30)",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"
-    ]
-    headers = {'User-Agent': random.choice(USER_AGENTS)}
+    headers = {'User-Agent': generate_user_agent(os='win')}
 
     def source_get_by_phantomjs():
         dcap = dict(DesiredCapabilities.PHANTOMJS)
-        dcap["phantomjs.page.settings.userAgent"] = random.choice(USER_AGENTS)
+        dcap["phantomjs.page.settings.userAgent"] = headers['User-Agent']
+        dcap["phantomjs.page.settings.loadImages"] = False
         driver = webdriver.PhantomJS(executable_path=helper.CURR_PATH + '/core/phantomjs-2.1.1',
                                      desired_capabilities=dcap)
-        driver.get(url)
-        driver.implicitly_wait(20)
-        source = driver.page_source
-        driver.quit()
-        return source
+        helper.logger_getter().debug('The phantomjs is running...')
+        try:
+            driver.implicitly_wait(5)
+            driver.set_page_load_timeout(10)
+            # 设置10秒脚本超时时间
+            driver.set_script_timeout(10)
+            driver.get(url)
+            source = driver.page_source
+            driver.quit()
+            return source
+        except Exception as e:
+            helper.logger_getter().error(str(e))
+            driver.quit()
+            exit(1)
 
     if pagetype is not None:
         return source_get_by_phantomjs()
@@ -50,9 +50,9 @@ def page_source_get(url, pagetype=None):
                 else:
                     return rep_data
             except requests.exceptions.RequestException as e:
-                helper.logger_getter.debug('Exception: ' + str(e))
-                helper.logger_getter.debug(url)
-                helper.logger_getter.debug('Sleep for ' + str(seconds) + 's after timeout...')
+                helper.logger_getter().debug('Exception: ' + str(e))
+                helper.logger_getter().debug(url)
+                helper.logger_getter().debug('Sleep for ' + str(seconds) + 's after timeout...')
                 time.sleep(seconds)
 
 
