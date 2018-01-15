@@ -8,42 +8,36 @@ from bs4 import BeautifulSoup
 from core import helper
 from core import html
 
-zealer_tech = 'http://www.zealer.com:8080/list?cp=2'
-page_source = html.page_source_get(zealer_tech, pagetype='special')
-soup = BeautifulSoup(page_source, 'html5lib')
-videos_aTags = soup.select('li.series_item a')
-temp_data = helper.TEMP_DIR + '/zealer_tech.txt'
+
+def get_first_video_title():
+    zealer_tech = 'http://www.zealer.com:8080/list?cp=2'
+    page_source = html.page_source_get(zealer_tech, pagetype='special')
+    soup = BeautifulSoup(page_source, 'html5lib')
+    return soup.select_one('li.series_item a p').get_text().strip()
 
 
-def data_persistence():
+def data_persistence(content):
     with open(temp_data, 'w') as f:
-        for i in videos_aTags:
-            f.write(i.get('href') + '\n')
+        f.write(content)
 
 
 def check_new():
-    with open(temp_data) as f:
-        old_hrefs_list = [i.split('\n')[0] for i in f.readlines()]
-
-    new_videos = [i for i in videos_aTags if i.get('href') not in old_hrefs_list]
-    if len(new_videos) == 0:
+    previous_video_title = open(temp_data).read()
+    current_video_title = get_first_video_title()
+    if previous_video_title == current_video_title:
         helper.logger_getter().info('Zealer did not publish any new video yet!')
     else:
         msg_content = 'Zealer published new video!'
         helper.logger_getter().info(msg_content)
-        # Notice the order here of two 'for' loop
-        for i in new_videos:
-            for j in videos_aTags:
-                if i.get('href') == j.get('href'):
-                    helper.mail_send(helper.date_getter() + '  '
-                                     + msg_content, j.find('p').get_text())
-        helper.logger_getter().info("Renew the videos' href in the file")
-        data_persistence()
+        helper.mail_send(helper.date_getter() + '  ' + msg_content, current_video_title)
+        helper.logger_getter().info("Renew the first video's title in the file.")
+        data_persistence(current_video_title)
 
 
 if __name__ == '__main__':
+    temp_data = helper.TEMP_DIR + '/zealer_tech.txt'
     if not os.path.isfile(temp_data):
-        helper.logger_getter().info("First init to store all videos' href!")
-        data_persistence()
+        helper.logger_getter().info("First init to store the 1st video's title!")
+        data_persistence(get_first_video_title())
         exit(0)
     check_new()

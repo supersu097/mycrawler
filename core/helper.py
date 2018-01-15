@@ -24,7 +24,7 @@ def dir_check(user_dir):
 def logger_getter():
     logger = logging.getLogger()
     if not len(logger.handlers):
-        logger.setLevel(logging.INFO)
+        logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter(
             "%(filename)s - %(asctime)s - %(levelname)s -%(message)s",
             datefmt='%Y-%m-%d %H:%M:%S')
