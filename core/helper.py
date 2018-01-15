@@ -56,5 +56,5 @@ def mail_send(subject, mail_body=''):
         s.quit()
     except smtplib.SMTPException as e:
         logger_getter().error(str(e))
-
+        exit(1)
 
