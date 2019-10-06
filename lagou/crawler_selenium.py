@@ -6,7 +6,6 @@ from os.path import join as os_join
 from bs4 import BeautifulSoup
 import os
 import time
-import pandas
 
 
 class Lagou(object):
@@ -69,11 +68,6 @@ class Lagou(object):
             print(str(e))
             self.driver.quit()
             exit(1)
-
-    @staticmethod
-    def save_data(self, data, csv_header):
-        table = pandas.DataFrame(data)
-        table.to_csv(r'/Users/sharp/Desktop/LaGou.csv', header=csv_header, index=False, mode='a+')
 
     def save_data_into_csv(self, line_data):
         with open(r'/Users/sharp/Desktop/LaGou.csv', 'a+') as f:
